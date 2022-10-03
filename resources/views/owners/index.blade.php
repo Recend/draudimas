@@ -1,5 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('content')
+    <div class="container">
 <a class="btn btn-primary" href="{{ route('owners.create') }}">Prideti savininka</a>
 <a class="btn btn-warning float-end" href="{{ route('cars.index') }}">Automobiliai</a>
 
@@ -9,7 +10,7 @@
     <tr>
         <th>Vardas</th>
         <th>Pavardė</th>
-        <th></th>
+        <th>Priklausantys automobiliai</th>
         <th></th>
 
     </tr>
@@ -19,6 +20,11 @@
         <tr>
             <td>{{ $owner->name  }}</td>
             <td>{{ $owner->surname }}</td>
+            <td>
+          @foreach($owner->car as $car)
+           {{ $car->brand." ".$car->model. ", " }}
+       @endforeach
+          </td>
             <td><a class="btn btn-success" href="{{ route('owners.edit', $owner->id) }}">Koreguoti</a> </td>
             <td>
                 <form action="{{ route('owners.destroy', $owner->id) }}" method="post">
@@ -31,4 +37,5 @@
     @endforeach
     </tbody>
 </table>
+    </div>
 @endsection

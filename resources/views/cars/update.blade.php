@@ -17,7 +17,11 @@
     </div>
     <div>
         <label class="form-label">Savininkas:</label>
-        <input class="form-control" type="number" name="owner_id" value="{{$car->owner_id}}">
+        <select class="form-control" name="owner_id">
+            @foreach($owners as $owner)
+            <option value="{{$owner->id}}">{{$owner->name}}</option>
+            @endforeach
+        </select>
     </div>
     <button class="btn btn-success mt-3">Atnaujinti</button>
     <a href="{{route('cars.index')}}" class="btn btn-primary mt-3 float-end">Atgal</a>

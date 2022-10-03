@@ -16,10 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth')->group(function (){
+Route::resources([
+    'cars'=>CarController::class,
+    'owners'=>OwnerController::class
+]);
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('cars', CarController::class);
-//Route::get('/cars',[CarController::class, 'cars.index' ])->name('cars');
-Route::resource('owners', OwnerController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

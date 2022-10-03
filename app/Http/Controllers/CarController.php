@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Owner;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -14,8 +15,9 @@ class CarController extends Controller
      */
     public function index()
     {
+        $owners=Owner::all();
         $cars=Car::all();
-        return view("cars.index",['cars'=>$cars]);
+        return view("cars.index",['cars'=>$cars, 'owners'=>$owners]);
     }
 
     /**
@@ -25,7 +27,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('cars.create');
+        $owners=Owner::all();
+        return view('cars.create',['owners'=>$owners]);
     }
 
     /**
@@ -64,7 +67,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        return view('cars.update', ['car'=>$car]);
+        $owners=Owner::all();
+        return view('cars.update', ['car'=>$car,'owners'=>$owners]);
     }
 
     /**
