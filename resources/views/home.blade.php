@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                        <br>
+                        <a class="btn btn-warning" href="{{ route('owners.index') }}">Savininkai</a><br>
+                        <a class="btn btn-warning mt-3" href="{{ route('cars.index') }}">Automobiliai</a>
                 </div>
             </div>
         </div>
