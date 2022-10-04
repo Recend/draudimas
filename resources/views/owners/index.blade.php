@@ -10,8 +10,8 @@
     <tr>
         <th>Vardas</th>
         <th>Pavardė</th>
+        <th>El paštas</th>
         <th>Priklausantys automobiliai</th>
-        <th></th>
 
     </tr>
     </thead>
@@ -20,6 +20,7 @@
         <tr>
             <td>{{ $owner->name  }}</td>
             <td>{{ $owner->surname }}</td>
+            <td>{{ $owner->email }}</td>
             <td>
           @foreach($owner->car as $car)
            {{ $car->brand." ".$car->model. ", " }}

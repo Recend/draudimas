@@ -4,15 +4,30 @@
     @csrf
     <div class="mb-3">
         <label class="form-label">Registracijos numeris:</label>
-        <input class="form-control" type="text" name="reg_number">
+        <input class="form-control @if ($errors->has('reg_number')) is-invalid @endif" type="text" name="reg_number" value="{{ old('reg_number') }}">
+        @if($errors->has('reg_number'))
+            @foreach($errors->get('reg_number') as $error)
+        {{ $error }} <br>
+            @endforeach
+        @endif
     </div>
     <div  class="mb-3">
         <label class="form-label">Markė:</label>
-        <input class="form-control" type="text" name="brand">
+        <input class="form-control @if ($errors->has('brand')) is-invalid @endif" type="text" name="brand" value="{{ old('brand') }}">
+        @if($errors->has('brand'))
+            @foreach($errors->get('brand') as $error)
+                {{ $error }} <br>
+            @endforeach
+        @endif
     </div>
   <div  class="mb-3">
         <label class="form-label">Modelis:</label>
-        <input class="form-control" type="text" name="model">
+        <input class="form-control @if ($errors->has('model')) is-invalid @endif " type="text" name="model" value="{{ old('model') }}">
+      @if($errors->has('model'))
+          @foreach($errors->get('model') as $error)
+              {{ $error }} <br>
+          @endforeach
+      @endif
     </div>
   <div  class="mb-3">
         <label class="form-label">Savininkas:</label>

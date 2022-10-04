@@ -17,10 +17,7 @@ class OwnerController extends Controller
     {
         $owners=Owner::all();
         $cars=Car::all();
-//        foreach ($owners as $owner){
-//            echo $owner->name."<br>";
-//            echo $owner->car;
-//        }
+//
       return view("owners.index",['owners'=>$owners, 'cars'=>$cars]);
     }
 
@@ -43,9 +40,22 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>['required', 'min:3', 'max:20'],
+            'surname'=>['required', 'min:3', 'max:20'],
+            'email' => ['email:rfc,dns', 'unique:App\Models\Owner,email']
+        ],[
+            'name.required'=>'Laukelis privalomas',
+            'name.min'=>'Vardo laukelis ne trumpesnis nei 3 simboliai',
+            'surname.required'=>'Laukelis privalomas',
+            'surname.min'=>'Pavardės laukelis ne trumpesnis nei 3 simboliai',
+            'email.email'=>'Elektroninio pašto adresas turi būti įvestas teisingai',
+            'email.unique'=>'Toks elektroninio pašto adresas jau egzistuoja',
+        ]);
         $owners=new Owner();
         $owners->name=$request->name;
         $owners->surname=$request->surname;
+        $owners->email=$request->email;
         $owners->save();
         return redirect()->route('owners.index');
     }
@@ -81,8 +91,21 @@ class OwnerController extends Controller
      */
     public function update(Request $request, Owner $owner)
     {
+        $request->validate([
+            'name'=>['required', 'min:3', 'max:20'],
+            'surname'=>['required', 'min:3', 'max:20'],
+            'email' => ['email:rfc,dns', 'unique:App\Models\Owner,email']
+        ],[
+            'name.required'=>'Laukelis privalomas',
+            'name.min'=>'Vardo laukelis ne trumpesnis nei 3 simboliai',
+            'surname.required'=>'Laukelis privalomas',
+            'surname.min'=>'Pavardės laukelis ne trumpesnis nei 3 simboliai',
+            'email.email'=>'Elektroninio pašto adresas turi būti įvestas teisingai',
+            'email.unique'=>'Toks elektroninio pašto adresas jau egzistuoja'
+        ]);
         $owner->name=$request->name;
         $owner->surname=$request->surname;
+        $owner->email=$request->email;
         $owner->save();
         return redirect()->route('owners.index');
     }

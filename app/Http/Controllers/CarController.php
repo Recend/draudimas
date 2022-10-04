@@ -39,6 +39,20 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'reg_number'=>['required','min:6', 'max:6', 'alpha_num', 'unique:App\Models\Car,reg_number'],
+            'brand'=>['required','min:3', 'max:30'],
+            'model'=>['required','min:3', 'max:30']
+        ],[
+            'reg_number.required'=>'Automobilio registracijos numeris privalo būti pateiktas',
+            'reg_number.unique'=>'Automobilis tokiu registracijos numeriu jau egzistuoja',
+            'reg_number.min'=>'Automobilio registracijos numeris 6 simbolių be tarpo',
+            'reg_number.max'=>'Automobilio registracijos numeris 6 simbolių be tarpo',
+            'brand.required'=>'Automobilio markė privalo būti pateikta',
+            'brand.min'=>'Automobilio markė ne trumpesnė nei 3 simboliai',
+            'model.required'=>'Automobilio modelis privalo būti pateiktas',
+            'model.min'=>'Automobilio modelis ne trumpesnis nei 3 simboliai'
+            ]);
         $cars=new Car();
         $cars->reg_number=$request->reg_number;
         $cars->brand=$request->brand;
@@ -80,6 +94,19 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
+        $request->validate([
+            'reg_number'=>['required','min:6', 'max:6', 'alpha_num'],
+            'brand'=>['required','min:3', 'max:30'],
+            'model'=>['required','min:3', 'max:30']
+        ],[
+            'reg_number.required'=>'Automobilio registracijos numeris privalo būti pateiktas',
+            'reg_number.min'=>'Automobilio registracijos numeris 6 simbolių be tarpo',
+            'reg_number.max'=>'Automobilio registracijos numeris 6 simbolių be tarpo',
+            'brand.required'=>'Automobilio markė privalo būti pateikta',
+            'brand.min'=>'Automobilio markė ne trumpesnė nei 3 simboliai',
+            'model.required'=>'Automobilio modelis privalo būti pateiktas',
+            'model.min'=>'Automobilio modelis ne trumpesnis nei 3 simboliai'
+        ]);
         $car->reg_number=$request->reg_number;
         $car->brand=$request->brand;
         $car->model=$request->model;
