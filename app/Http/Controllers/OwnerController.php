@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Owner;
 use App\Models\Car;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OwnerController extends Controller
@@ -17,8 +18,8 @@ class OwnerController extends Controller
     {
         $owners=Owner::all();
         $cars=Car::all();
-//
-      return view("owners.index",['owners'=>$owners, 'cars'=>$cars]);
+        $user=User::all();
+      return view("owners.index",['owners'=>$owners, 'cars'=>$cars, 'user'=>$user]);
     }
 
 

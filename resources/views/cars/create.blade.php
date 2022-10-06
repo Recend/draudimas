@@ -31,9 +31,9 @@
     </div>
   <div  class="mb-3">
         <label class="form-label">Savininkas:</label>
-     <select class="form-control" name="owner_id">
+     <select class="form-control" name="owner_id" >
          @foreach($owners as $owner)
-             <option value="{{$owner->id}}">{{$owner->name}}</option>
+             <option value="{{$owner->id}}" @if(old('owner_id')==$owner->id) selected  @endif>{{$owner->name}}</option>
          @endforeach
      </select>
     </div>
