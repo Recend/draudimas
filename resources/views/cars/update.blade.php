@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('content')
-<form class="form-control" action="{{ route('cars.update', $car->id) }}" method="post">
+<form class="form-control" action="{{ route('cars.update', $car->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -37,6 +37,10 @@
             <option @if($owner->id==$car->owner->id)? selected @endif value="{{$owner->id}}">{{$owner->name}}</option>
             @endforeach
         </select>
+    </div>
+    <div>
+        <label class="form-label">Automobilio nuotrauka</label>
+        <input type="file" name="image" class="form-control">
     </div>
     <button class="btn btn-success mt-3">Atnaujinti</button>
     <a href="{{route('cars.index')}}" class="btn btn-primary mt-3 float-end">Atgal</a>

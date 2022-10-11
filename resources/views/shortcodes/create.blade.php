@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <form class="form-control" action="{{ route('short_codes.store') }}" method="post">
+    <form class="form-control" action="{{ route('shortcodes.store') }}" method="post">
         @csrf
         <div class="mb-3">
             <label class="form-label">Shortcode</label>

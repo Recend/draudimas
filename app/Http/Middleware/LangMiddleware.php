@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\App;
 
-class roleMiddleware
+class LangMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,14 +17,9 @@ class roleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()==null){
-            return redirect('/cars');
+        if($request->session()->get('lang')!=null){
+            App::setLocale($request->session()->get('lang'));
         }
-
-        if (Gate::denies('edit')){
-            return redirect()->back();
-        }
-
         return $next($request);
     }
 }

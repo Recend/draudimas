@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\LangController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ShortCodeController;
+use \App\Http\Controllers\ImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +20,8 @@ use \App\Http\Controllers\ShortCodeController;
 
 
 
-Route::get('cars', [CarController::class, 'index'])->name('cars.index');
-Route::middleware(['auth', 'role', 'shortcode' ])->group(function (){
+Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
+Route::middleware(['auth', 'role'])->group(function (){
 Route::resource('cars',CarController::class)->except(['index']);
 
 });
@@ -30,7 +32,19 @@ Route::middleware( ['auth', 'role', 'shortcode'])->group(function () {
 
 });
 
-Route::resource('shortcode', ShortCodeController::class);
+Route::get('images', [ImageController::class, 'index'])->name('images.index');
+Route::middleware( ['auth', 'shortcode'])->group(function () {
+    Route::resource('images', ImageController::class)->except(['index']);
+
+});
+
+Route::get('/setLang/{lang}', [LangController::class, 'setLanguage'])->name('setLang');
+
+Route::get('/image/{name}',[CarController::class, 'display'])
+    ->name('image.cars')
+    ->middleware('auth');
+
+Route::resource('shortcodes', ShortCodeController::class);
 
 Auth::routes();
 

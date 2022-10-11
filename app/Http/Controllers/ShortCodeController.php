@@ -94,6 +94,6 @@ class ShortCodeController extends Controller
     public function destroy(ShortCode $shortCode)
     {
         $shortCode->delete();
-        return redirect()->route('short_codes.index');
+        return redirect()->back();
     }
 }

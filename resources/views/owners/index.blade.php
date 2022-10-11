@@ -1,17 +1,18 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-<a class="btn btn-primary" href="{{ route('owners.create') }}">Prideti savininka</a>
-<a class="btn btn-warning float-end" href="{{ route('cars.index') }}">Automobiliai</a>
+        @can('create')
+<a class="btn btn-primary" href="{{ route('owners.create') }}">{{ __("Add owner") }}</a>
+        @endcan
 
 <table class="table table-striped">
     <thead>
 
     <tr>
-        <th>Vardas</th>
-        <th>Pavardė</th>
-        <th>El paštas</th>
-        <th>Priklausantys automobiliai</th>
+        <th>{{ __("Name") }}</th>
+        <th>{{ __("Surname") }}</th>
+        <th>{{ __("Email") }}</th>
+        <th>{{ __("Owned cars") }}</th>
 
     </tr>
     </thead>
@@ -26,13 +27,17 @@
            {{ $car->brand." ".$car->model. ", " }}
        @endforeach
           </td>
-            <td><a class="btn btn-success" href="{{ route('owners.edit', $owner->id) }}">Koreguoti</a> </td>
+            @can('edit')
+            <td><a class="btn btn-success" href="{{ route('owners.edit', $owner->id) }}">{{ __("Edit") }}</a> </td>
+            @endcan
             <td>
+                @can('delete')
                 <form action="{{ route('owners.destroy', $owner->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger">Ištrinti</button>
+                    <button class="btn btn-danger">{{ __("Delete") }}</button>
                 </form>
+                @endcan
             </td>
         </tr>
     @endforeach
