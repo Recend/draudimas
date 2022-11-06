@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @can('create')
+        @can('create', \App\Models\Owner::class)
 <a class="btn btn-primary" href="{{ route('owners.create') }}">{{ __("Add owner") }}</a>
         @endcan
 
@@ -31,7 +31,7 @@
             <td><a class="btn btn-success" href="{{ route('owners.edit', $owner->id) }}">{{ __("Edit") }}</a> </td>
             @endcan
             <td>
-                @can('delete')
+                @can('delete', \App\Models\Car::class)
                 <form action="{{ route('owners.destroy', $owner->id) }}" method="post">
                     @csrf
                     @method('DELETE')

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-@can('create')
+@can('create', \App\Models\Car::class)
 <a class="btn btn-primary" href="{{ route('cars.create') }}">{{ __("Add car") }}</a>
         @endcan
 <a class="btn btn-warning float-end" href="{{ route('shortcodes.index') }}">Trumpiniai</a>

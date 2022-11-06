@@ -113,7 +113,7 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-         if(Gate::allows('edit')) {
+//         if(Gate::allows('edit')) {
              $request->validate([
                  'reg_number' => ['required', 'min:6', 'max:6', 'alpha_num'],
                  'brand' => ['required', 'min:3', 'max:30'],
@@ -141,7 +141,7 @@ class CarController extends Controller
                  $image->car_id = $car->id;
              }
              $car->save();
-         }
+//         }
         return redirect()->route('cars.index');
     }
 

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @method('PUT')
+
         <form class="form-control" enctype="multipart/form-data" action="{{route('images.store')}}" method="POST">
+            @method('PUT')
             @csrf
             <input type="hidden" name="car_id" value="{{ $car->id }}">
             <label class="form-label">Pridėti nuotrauką</label>

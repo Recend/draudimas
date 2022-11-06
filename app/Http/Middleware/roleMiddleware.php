@@ -21,9 +21,9 @@ class roleMiddleware
             return redirect('/cars');
         }
 
-        if (Gate::denies('edit')){
-            return redirect()->back();
-        }
+//        if (Gate::denies('edit')){
+//            return redirect()->back();
+//        }
 
         return $next($request);
     }
